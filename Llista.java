@@ -19,7 +19,25 @@ public class Llista {
 	
 	
 	public boolean insertarValor(int posicio, int valor) {
-		return false;
+		if(posicio < 0 || posicio > this.getNElements()) {
+			return false;
+		} else if (posicio == 0) {
+			Node aux = this.primer;
+			this.primer = new Node(valor);
+			this.primer.setNext(aux);
+		} else {
+			int i = 0;
+			Node aux = this.primer;
+			Node anterior = null;
+			while(i < posicio) {
+				anterior = aux;
+				aux = aux.getNext();
+				i++;
+			}
+			anterior.setNext(new Node(valor));
+			anterior.getNext().setNext(aux);
+		}
+		return true;
 	}
 	public boolean eliminaValor(int posicio)
 	{
