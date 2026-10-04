@@ -39,9 +39,27 @@ public class Llista {
 		}
 		return true;
 	}
-	public boolean eliminaValor(int posicio)
-	{
-		return false;
+	public boolean eliminaValor(int posicio) {
+		if(this.primer == null) {
+			return false;
+		} else if(posicio < 0 || posicio >= this.getNElements()) {
+			return false;
+		} else if(posicio == 0) {
+			this.primer = primer.getNext();
+			return true;
+		}else {
+			Node aux = this.primer;
+			Node anterior = null;
+			int i = 0;
+			while(i < posicio) {
+				anterior = aux;
+				aux = aux.getNext();
+				i++;
+			}
+			anterior.setNext(aux.getNext());
+			return true;
+		}
+
 	}
 	
 	public int getValor(int posicio) {
