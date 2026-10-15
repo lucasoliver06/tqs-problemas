@@ -28,22 +28,50 @@ class SecondsCalculatorTest {
 		assertEquals(157852800, sec.SegonsFins(1, 1, 1985, 0, 0, 0)); //Test dos anys traspas
 
 		//Tests negativos
-		assertEquals(-1, sec.SegonsFins(-1, 1, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, -1, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, -1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, -1, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, 0, -1, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, 0, 0, -1));
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(-1, 1, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, -1, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, -1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, -1, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, 0, -1, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, 0, 0, -1);
+		});
 
 		//Tests fueras de límite
-		assertEquals(-1, sec.SegonsFins(0, 1, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 0, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1979, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(32, 1, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 13, 1981, 0, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, 24, 0, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, 0, 60, 0));
-		assertEquals(-1, sec.SegonsFins(1, 1, 1981, 0, 0, 60));
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(0, 1, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 0, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1979, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(32, 1, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 13, 1981, 0, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, 24, 0, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, 0, 60, 0);
+		});
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(1, 1, 1981, 0, 0, 60);
+		});
 
 		//----------------------------------------------------------------------------------------------
 		//TEST PAIRWISE
@@ -60,17 +88,47 @@ class SecondsCalculatorTest {
 		assertEquals(641520000L, sec.SegonsFins(30, 4, 2000, 0, 0, 0)); // 30-4-2000
 		assertEquals(3794601600L, sec.SegonsFins(31, 3, 2100, 0, 0, 0)); // 31-3-2100
 
-		// Casos inválidos
-		assertEquals(-1, sec.SegonsFins(29, 2, 2100, 0, 0, 0)); // 29-2-2100
-		assertEquals(-1, sec.SegonsFins(30, 2, 2001, 0, 0, 0)); // 30-2-2001
-		assertEquals(-1, sec.SegonsFins(30, 2, 2100, 0, 0, 0)); // 30-2-2100
-		assertEquals(-1, sec.SegonsFins(31, 2, 2004, 0, 0, 0)); // 31-2-2004
-		assertEquals(-1, sec.SegonsFins(31, 4, 2001, 0, 0, 0)); // 31-4-2001
-		assertEquals(-1, sec.SegonsFins(31, 2, 2000, 0, 0, 0)); // 31-2-2000
-		assertEquals(-1, sec.SegonsFins(32, 2, 2000, 0, 0, 0)); // 32-2-2000
-		assertEquals(-1, sec.SegonsFins(32, 3, 2001, 0, 0, 0)); // 32-3-2001
-		assertEquals(-1, sec.SegonsFins(32, 4, 2004, 0, 0, 0)); // 32-4-2004
-		assertEquals(-1, sec.SegonsFins(32, 2, 2100, 0, 0, 0)); // 32-2-2100 0, 0, 0));
+		// Casos inválidos actualizados a Diseño por Contrato (DbC)
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(29, 2, 2100, 0, 0, 0); // 29-2-2100
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(30, 2, 2001, 0, 0, 0); // 30-2-2001
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(30, 2, 2100, 0, 0, 0); // 30-2-2100
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(31, 2, 2004, 0, 0, 0); // 31-2-2004
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(31, 4, 2001, 0, 0, 0); // 31-4-2001
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(31, 2, 2000, 0, 0, 0); // 31-2-2000
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(32, 2, 2000, 0, 0, 0); // 32-2-2000
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(32, 3, 2001, 0, 0, 0); // 32-3-2001
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(32, 4, 2004, 0, 0, 0); // 32-4-2004
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.SegonsFins(32, 2, 2100, 0, 0, 0); // 32-2-2100
+		});
 
 	}
 
@@ -103,7 +161,14 @@ class SecondsCalculatorTest {
 		assertEquals(28, sec.getDiesDelMes(2,2100));
 		assertEquals(29, sec.getDiesDelMes(2,2004));
 		assertEquals(28, sec.getDiesDelMes(2,1999));
-		assertEquals(-1, sec.getDiesDelMes(13, 1979));
-		assertEquals(-1, sec.getDiesDelMes(0,2000));
+
+		// Casos inválidos actualizados a Diseño por Contrato (DbC)
+		assertThrows(AssertionError.class, () -> {
+			sec.getDiesDelMes(13, 1979);
+		});
+
+		assertThrows(AssertionError.class, () -> {
+			sec.getDiesDelMes(0,2000);
+		});
 	}
 }
